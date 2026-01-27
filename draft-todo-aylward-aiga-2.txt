@@ -9,7 +9,7 @@ Expires: 31 July 2026
 
 
             AI Governance and Accountability Protocol (AIGA)
-                        draft-aylward-aiga-2-00
+                    draft-todo-aylward-aiga-2-latest
 
 Abstract
 
@@ -38,6 +38,13 @@ Abstract
    AI "Warden Triumvirate" Triage, Human Review Board (HRB) Multi-
    Signature, Peer Consensus Failsafe & Identity Rotation, and Double
    Ratchet Cryptography.
+
+Discussion Venues
+
+   This note is to be removed before publishing as an RFC.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/Edward-Aylward/AI-Governance-Architecture-AIGA.
 
 Status of This Memo
 
