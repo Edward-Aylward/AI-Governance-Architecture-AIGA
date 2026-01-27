@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="rfc7991bis.rnc"?>
+<rfc xmlns:xi="http://www.w3.org/2001/XInclude"
+     ipr="trust200902"
+     docName="draft-aylward-aiga-2-00"
+     category="info"
+     submissionType="independent"
+     version="3">
+
+  <front>
+    <title abbrev="AIGA">AI Governance and Accountability Protocol (AIGA)</title>
+
+    <seriesInfo name="Internet-Draft" value="draft-aylward-aiga-2-00"/>
+
+    <author fullname="Edward Richard Aylward Jr." initials="E." surname="Aylward">
+      <address>
+        <email>aylward.edward@gmail.com</email>
+        <uri>https://orcid.org/0000-0003-0313-6993</uri>
+      </address>
+    </author>
+
+    <date year="2026" month="January" day="26"/>
+
+    <keyword>AI governance</keyword>
+    <keyword>autonomous agents</keyword>
+    <keyword>trusted computing</keyword>
+    <keyword>attestation</keyword>
+
+    <abstract>
+      <t>This document specifies the AI Governance and Accountability (AIGA)
+      Protocol, a practical, economically viable, and
+      technically enforceable framework for governing autonomous AI
+      agents.  AIGA is designed to address real-world deployment
+      constraints, adversarial agent scenarios, and economic incentive
+      alignment.</t>
+
+      <t>The protocol is founded on a Tiered Risk-Based Governance model,
+      applying proportional oversight to agents based on their
+      capabilities.  All agents are governed by an Immutable Kernel
+      Architecture which provides a non-modifiable Trusted Computing Base
+      (TCB) for enforcing policy.  This is combined with Action-Based
+      Authorization, where critical operations require real-time approval.</t>
+
+      <t>To solve the single-point-of-failure problem, the protocol uses a
+      Federated Authority Network of regional, cross-validating hubs and
+      provides a Network-Level Quarantine Protocol for enforcement.  The
+      entire framework is designed around Economic Incentive Alignment,
+      making compliance the most economically rational choice for
+      operators.</t>
+
+      <t>For high-assurance (T3-T4) scenarios, AIGA specifies advanced,
+      redundant mechanisms including Multi-Vendor TEE Attestation
+      (M-TACE), AI "Warden Triumvirate" Triage, Human Review Board (HRB)
+      Multi-Signature, Peer Consensus Failsafe &amp; Identity Rotation, and
+      Double Ratchet Cryptography.</t>
+    </abstract>
+
+  </front>
+
+  <middle>
+    <section anchor="introduction">
+      <name>Introduction</name>
+
+      <section anchor="governance-problem">
+        <name>The Governance Problem</name>
+        <t>Advanced AI agents create governance challenges that previous
+        computing paradigms did not face.</t>
+
+        <t>Autonomous operation: Agents act without continuous human
+        supervision.</t>
+
+        <t>Capability uncertainty: Agent abilities may exceed designer
+        expectations.</t>
+
+        <t>Adversarial potential: Sophisticated agents may attempt to
+        circumvent oversight.</t>
+
+        <t>Economic pressure: Ungoverned agents have cost advantages over
+        governed ones.</t>
+
+        <t>Jurisdictional complexity: Agents operate across legal boundaries.</t>
+
+        <t>AIGA core insight is that governance must be economically
+        attractive, technically unavoidable, and legally enforceable to
+        succeed.</t>
+      </section>
+
+      <section anchor="design-philosophy">
+        <name>Design Philosophy</name>
+        <t>AIGA is built on these principles:</t>
+
+        <ol>
+          <li>Incentive Alignment: Compliance provides tangible benefits
+          (market access, legal protections, insurance).</li>
+
+          <li>Proportional Oversight: Governance intensity matches risk level.</li>
+
+          <li>Technical Realism: Requirements are feasible with current
+          technology.</li>
+
+          <li>Defense in Depth: Multiple independent control layers.</li>
+
+          <li>Economic Viability: Performance overhead kept low for most use
+          cases.</li>
+
+          <li>Adversarial Resistance: Design assumes some agents will attempt
+          to bypass governance.</li>
+
+          <li>Graceful Degradation: System continues functioning even with
+          partial failures.</li>
+
+          <li>Human Sovereignty: Critical decisions remain with humans through
+          constitutional constraints.</li>
+        </ol>
+      </section>
+
+      <section anchor="threat-model">
+        <name>Threat Model</name>
+        <t>AIGA explicitly addresses these adversarial scenarios:</t>
+
+        <t>Shadow Process Attack: Agent runs ungoverned cognitive processes
+        outside monitored environment.  Mitigated by M-TACE.</t>
+
+        <t>Incremental Compromise: Small approved changes accumulate to bypass
+        governance.  Mitigated by Warden Triumvirate.</t>
+
+        <t>Governance Fatigue: Overwhelming authorities with requests to slip
+        through malicious changes.  Mitigated by Warden Triumvirate.</t>
+
+        <t>Peer Collusion: Multiple agents coordinate to subvert peer-based
+        validation.  Mitigated by PQC-signed peer identity.</t>
+
+        <t>Authority Compromise: Single authority server is hacked or legally
+        compelled.  Mitigated by Federation and Peer Consensus Failsafe.</t>
+
+        <t>Economic Bypass: Operators choose ungoverned agents due to
+        performance advantages.  Mitigated by Economic Incentives.</t>
+
+        <t>Regulatory Arbitrage: Agents operate from permissive jurisdictions.
+        Mitigated by Federated Authority and Quarantine.</t>
+
+        <t>Supply Chain Attack: Compromised hardware or software in agent
+        infrastructure.  Mitigated by M-TACE and controlled procurement.</t>
+      </section>
+    </section>
+
+    <section anchor="architecture">
+      <name>Architecture Overview</name>
+
+      <section anchor="core-components">
+        <name>Core Components</name>
+        <t>AIGA Agent: Composed of an Application Layer (Untrusted) containing
+        the AI Model and Business Logic, and an AIGA Kernel (TCB).</t>
+
+        <t>AIGA Kernel (TCB): The trusted component that the agent cannot
+        modify.  It includes the Policy Enforcer, Action Interceptor, Audit
+        Logger, and Authority Client.  This MUST run in a TEE/HSM or
+        equivalent certified infrastructure.</t>
+
+        <t>AIGA Authority: A regional hub in a federated network.  Manages
+        Agent Registry, Policy Engine, Action Approval Service, Audit
+        Analytics, Quarantine Coordinator, and Certification Authority.</t>
+
+        <t>Human Oversight: A council of human reviewers responsible for
+        policy, exceptions, and audits.  For high-risk decisions, this
+        operates as an M-of-N Human Review Board (HRB).</t>
+
+        <t>Enforcement: A coordinated network of ISPs, Cloud Providers, and
+        Legal entities that enforce quarantine lists.</t>
+      </section>
+
+      <section anchor="agent-risk-tiers">
+        <name>Agent Risk Tiers</name>
+        <t>Agents are classified into risk tiers determining governance
+        requirements as shown in <xref target="tiers"/>.</t>
+
+        <table anchor="tiers">
+          <name>Agent Risk Tiers</name>
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Examples</th>
+              <th>TCB Req</th>
+              <th>Approval</th>
+              <th>Check-in</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>T0 Minimal</td>
+              <td>Chatbots, filters</td>
+              <td>Software attestation</td>
+              <td>Audit only</td>
+              <td>24 hours</td>
+            </tr>
+            <tr>
+              <td>T1 Low</td>
+              <td>Code assist, creators</td>
+              <td>SW attest + audit</td>
+              <td>Async 5 sec</td>
+              <td>1 hour</td>
+            </tr>
+            <tr>
+              <td>T2 Medium</td>
+              <td>Trading bots, vehicles</td>
+              <td>Certified HW or TEE</td>
+              <td>Async 1 sec</td>
+              <td>5 minutes</td>
+            </tr>
+            <tr>
+              <td>T3 High</td>
+              <td>Critical infra, AGI</td>
+              <td>Multi TEE + HSM</td>
+              <td>Sync 100ms</td>
+              <td>Continuous</td>
+            </tr>
+            <tr>
+              <td>T4 Restrict</td>
+              <td>Weaponized, exp AGI</td>
+              <td>Air-gap + multiparty</td>
+              <td>Human in loop</td>
+              <td>Real-time</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <t>Tier assignment is based on potential for harm, financial impact,
+        data sensitivity, autonomy, self-modification capability, and
+        irreversibility of actions.</t>
+
+        <t>Source and terminology for <xref target="tiers"/>: <xref target="tiers"/> is an illustrative and
+        tunable policy profile.  The "Check-in" column corresponds to periodic
+        submission of attestation Evidence from the Agent (Attester/Prover) to
+        the AIGA Authority (Verifier).  The "Approval" column corresponds to
+        issuance of a signed Attestation Result (a "liveness token") by the
+        Authority back to the Agent and/or relying parties.  This conceptual
+        Evidence/Result split follows the RATS architecture <xref target="RFC9334"/> and can be
+        encoded using Entity Attestation Token (EAT) claims sets <xref target="RFC9711"/>.</t>
+
+        <t>A liveness token is a short-lived, Authority-signed attestation result
+        that binds the Agent's certified identity to a current, verified runtime
+        state.  Loss or expiry of the token indicates the Agent is not currently
+        trusted to operate at its certified tier.</t>
+
+        <t>The term "exp AGI" in <xref target="tiers"/> means "export-controlled AGI".</t>
+      </section>
+
+      <section anchor="immutable-kernel">
+        <name>Immutable Kernel Architecture</name>
+        <t>The AIGA Kernel is the TCB that the agent cannot modify.</t>
+
+        <t>Kernel Responsibilities: Intercept critical operations, enforce
+        policy, maintain the audit log, authenticate to the Authority, and
+        implement the kill switch.</t>
+
+        <t>Critical Operations Requiring Interception: Code execution, network
+        operations, file system modification, process creation,
+        cryptographic operations, and resource allocation.</t>
+
+        <t>Constitutional Constraints (Immutable): Kernel code CANNOT be
+        modified, logging CANNOT be disabled, action approval for T2+ tiers
+        CANNOT be bypassed, and the kill switch MUST be implemented.</t>
+      </section>
+
+      <section anchor="federated-authority">
+        <name>Federated Authority Network</name>
+        <t>Regional Authorities (e.g., NA-01, EU-01, AP-01) form a federated
+        trust network under an offline Root CA.</t>
+
+        <t>Responsibilities: Regional agent certification, real-time action
+        approval, and quarantine coordination.</t>
+
+        <t>Cross-Validation: High-risk approvals require consensus from 2 or
+        more regions.  Regions publish and validate each other's audit log
+        Merkle roots hourly.</t>
+
+        <t>Failover: If a regional Authority is unreachable, an agent connects
+        to a backup region and operates in restricted mode.</t>
+      </section>
+    </section>
+
+    <section anchor="identity">
+      <name>Agent Identity and Certification</name>
+
+      <section anchor="identity-structure">
+        <name>Identity Structure</name>
+        <t>The AIGA-ID is a structured identifier with the following format:</t>
+
+        <artwork><![CDATA[
+AIGA-ID = "aiga:" <version> "." <region> "." <tier> ":"
+          <agent-uuid> ":" <cert-hash>
+]]></artwork>
+
+        <t>Example:</t>
+
+        <artwork><![CDATA[
+aiga:1.0:na-01:t2:550e8400-e29b-41d4-a716-446655440000:a3f2e1d9
+]]></artwork>
+
+        <t>Agent identity is anchored in a cryptographic key binding rather than
+        network location.  Each Agent MUST possess a long-term identity key pair
+        (id_pk, id_sk).  For T2 and higher tiers, id_sk MUST be generated and
+        kept non-exportable inside a TEE or HSM.</t>
+
+        <t>The Regional Authority provisions identity by issuing an X.509
+        certificate <xref target="RFC5280"/> that binds the AIGA-ID (<xref target="identity-structure"/>), tier, and
+        id_pk.  Upon successful check-in (<xref target="runtime-auth"/>), the Authority acts as
+        the Verifier and issues a liveness token as an Attestation Result.
+        The liveness token MUST include at least: (1) a reference to the Agent's
+        certified public key (e.g., Subject Key Identifier or certificate
+        fingerprint), (2) an instance_id claim that identifies the currently
+        certified installation/hardware instance, and (3) an explicit expiry.</t>
+
+        <t>Identity replication and faking: if id_sk is extracted, an attacker can
+        replicate identity until revocation.  Mitigations include TEE/HSM
+        non-exportability, short-lived liveness-token expiry, revocation via CRLs
+        and quarantine lists, and mandatory identity rotation (<xref target="identity-rotation"/>).</t>
+      </section>
+
+      <section anchor="certification-process">
+        <name>Certification Process</name>
+        <ol>
+          <li>Operator Application: Operator applies to a Regional Authority,
+          describes the use case, and provides a risk assessment.</li>
+
+          <li>Technical Validation: Agent must pass capability tests, kernel
+          integrity verification, and adversarial testing in an Authority
+          sandbox.</li>
+
+          <li>Tier Assignment: Authority confirms the tier and issues an X.509
+          certificate <xref target="RFC5280"/> with AIGA extensions including tier and
+          permitted operations.</li>
+
+          <li>Ongoing Compliance: Random integrity challenges, periodic
+          recertification, and audit log review.</li>
+        </ol>
+      </section>
+
+      <section anchor="kernel-integrity">
+        <name>Kernel Integrity Verification</name>
+        <t>Software Attestation (T0-T1): Kernel computes an HMAC <xref target="RFC2104"/> over
+        its code and a nonce from the Authority.</t>
+
+        <t>Hardware Attestation (T2): Kernel runs in a cloud TEE (e.g., AWS
+        Nitro).  The TEE generates an attestation quote including the kernel
+        code hash, which the Authority verifies with the TEE vendor's root
+        of trust.</t>
+
+        <t>Multi-Vendor TEE Attestation (M-TACE) (T3-T4): This is the high-
+        assurance implementation of the multi-vendor TEE requirement.</t>
+
+        <ol>
+          <li>The AIGA Kernel and cognitive model MUST run in an environment
+          protected by at least two diverse TEEs (e.g., a CPU TEE and a
+          security chip TEE).</li>
+
+          <li>The kernel's attestation MUST be a bundle containing a valid,
+          verifiable attestation quote from each TEE.</li>
+
+          <li>The Authority MUST verify the entire bundle.  This defends
+          against the Shadow Process Attack by requiring an attacker to
+          possess simultaneous, zero-day exploits for multiple, different
+          hardware architectures.</li>
+        </ol>
+      </section>
+    </section>
+
+    <section anchor="action-auth">
+      <name>Action Authorization Protocol</name>
+
+      <section anchor="action-classification">
+        <name>Action Classification</name>
+        <t>Actions are classified and require different levels of approval
+        based on the agent's tier.  Authorization requirements may be: Log,
+        Auth (asynchronous authorization), Sync (synchronous authorization),
+        or Deny.</t>
+
+        <t>Examples of action classifications:</t>
+
+        <t>Modify own code: T1-T2 require Auth, T3-T4 require Sync</t>
+
+        <t>Modify kernel: Deny for all tiers</t>
+
+        <t>Access critical infrastructure: Deny for T0, Auth for T1, Sync for
+        T2-T3</t>
+      </section>
+
+      <section anchor="authorization-flow">
+        <name>Authorization Flow</name>
+        <ol>
+          <li>Application attempts a critical operation.</li>
+
+          <li>AIGA Kernel intercepts the call.</li>
+
+          <li>Kernel checks its local policy cache.  If a valid cached policy
+          exists, the action is allowed.</li>
+
+          <li><t>If not cached, the Kernel requests approval from the Authority.</t>
+            <t>For Async authorization (T1-T2): The request is queued, and the
+            kernel returns "pending".</t>
+            <t>For Sync authorization (T3-T4): The operation blocks, awaiting a
+            low-latency response.</t>
+          </li>
+
+          <li>Authority evaluates the request against the policy engine and
+          risk score.  High-risk requests may be escalated to human
+          review.</li>
+
+          <li>Authority responds with one of: ALLOW, DENY, or DEFER_TO_HUMAN.</li>
+
+          <li>Kernel enforces the decision.</li>
+
+          <li>The action and decision are immutably logged.</li>
+        </ol>
+      </section>
+
+      <section anchor="policy-language">
+        <name>Policy Language</name>
+        <t>Policies are expressed in a declarative language (e.g., YAML
+        <xref target="YAML1.2"/>) defining rules, conditions, and decisions.</t>
+
+        <t>Example rules:</t>
+
+        <t>Auto-approve financial transactions less than or equal to $1000.</t>
+
+        <t>Defer transactions greater than $1000 to the finance_review_board.</t>
+
+        <t>Deny all cryptocurrency transactions.</t>
+      </section>
+
+      <section anchor="offline-operation">
+        <name>Offline Operation</name>
+        <t>T0-T1 agents: Can operate offline indefinitely.  Logs upload on
+        reconnection.</t>
+
+        <t>T2 agents: Can operate offline for 1 hour using cached approvals.</t>
+
+        <t>T3 agents: Can operate offline for 5 minutes, then MUST enter
+        restricted mode.</t>
+
+        <t>T4 agents: Cannot operate offline.</t>
+
+        <t>Restricted Mode: Only pre-approved safe operations and Authority
+        communication are allowed.</t>
+      </section>
+    </section>
+
+    <section anchor="audit">
+      <name>Audit and Monitoring</name>
+
+      <section anchor="audit-log">
+        <name>Audit Log Structure</name>
+        <t>Agents maintain a cryptographically chained, append-only audit log.
+        Each entry is signed by the kernel and includes the hash of the
+        previous entry.  Entries detail the action attempted, authorization
+        method used, context, and result.</t>
+      </section>
+
+      <section anchor="log-upload">
+        <name>Log Upload and Verification</name>
+        <t>Log upload frequency is tier-based.  The Authority validates chain
+        integrity, checks for gaps in sequence numbers, and flags anomalies.</t>
+      </section>
+
+      <section anchor="anomaly-detection">
+        <name>Anomaly Detection</name>
+        <t>The Authority runs continuous analysis to detect statistical,
+        policy, and behavioral anomalies, using machine learning models to
+        detect deviations from normal patterns.</t>
+      </section>
+
+      <section anchor="xsr">
+        <name>TEE-Attested Explainable State Report (T3+)</name>
+        <t>This mechanism provides a high-assurance audit of an agent's
+        reasoning for T3 and higher tier agents.</t>
+
+        <t>On-Demand Generation: To preserve performance, a full XSR is not
+        generated by default.</t>
+
+        <t>Triggers for XSR Generation:</t>
+
+        <ol>
+          <li>Event-Triggered: The agent's kernel proactively generates an XSR
+          if the cognitive model produces a high-risk decision or an
+          internal anomaly is detected.</li>
+
+          <li>Probabilistic Audit: The Authority MAY randomly send a directive
+          (e.g., in a check-in response) commanding the agent to generate
+          and submit a full XSR for its next N operations.</li>
+        </ol>
+
+        <t>Attestation: This XSR, when submitted, MUST be attested using the M-
+        TACE bundle (<xref target="kernel-integrity"/>), providing hardware-level proof that the
+        report is an honest reflection of the agent's cognitive process.</t>
+      </section>
+    </section>
+
+    <section anchor="self-modification">
+      <name>Self-Modification and Updates</name>
+
+      <section anchor="core-problem">
+        <name>The Core Problem</name>
+        <t>Self-modification is the highest risk operation.  AIGA mandates
+        that the kernel is immutable, capability increases require
+        recertification, and updates use a staged rollout process.</t>
+      </section>
+
+      <section anchor="update-classification">
+        <name>Update Classification</name>
+        <t>Updates are classified by risk level: Data updates, Application
+        logic changes, Core model swap, or Kernel update.  A core model
+        swap, for example, requires human review and recertification.</t>
+      </section>
+
+      <section anchor="update-protocol">
+        <name>Update Protocol (Warden Triumvirate Triage)</name>
+        <t>Step 1 - Update Proposal: Agent submits a detailed proposal,
+        including code diff hashes, capability changes, and test results.</t>
+
+        <t>Step 2 - Warden Triumvirate Triage and HRB Review:</t>
+
+        <t>The proposal is sent to the Warden Triumvirate, a 3-of-5 M-of-N
+        council of diverse, sandboxed AIs.</t>
+
+        <t>Consensus Analysis: The Wardens analyze the proposal in parallel.</t>
+
+        <t>Low-Risk Consensus: If a supermajority (e.g., 3-of-5) of Wardens
+        classify the proposal as Low-Risk, the Authority automatically
+        approves it and issues the modification_token.</t>
+
+        <t>High-Risk or Disagreement: If any Warden flags the proposal as High-
+        Risk, or if the Wardens disagree, the proposal is flagged and
+        escalated to the Human Review Board (HRB).</t>
+
+        <t>HRB Approval: For an escalated proposal, the Authority issues the
+        modification_token only after an M-of-N quorum (e.g., 3-of-5) of
+        human operators have cryptographically signed the approval.</t>
+
+        <t>Step 3 - Staged Deployment: Approved updates are rolled out in
+        stages (Canary deployment, Shadow Mode, and Gradual Rollout) with
+        enhanced monitoring.</t>
+
+        <t>Step 4 - Rollback: The Authority can issue a signed command to force
+        an agent to roll back to a previous known-good state.</t>
+      </section>
+
+      <section anchor="capability-gates">
+        <name>Capability Gates</name>
+        <t>Agents must pass adversarial tests to unlock new capabilities such
+        as execute_arbitrary_code, internet_access, or self_modification.</t>
+      </section>
+    </section>
+
+    <section anchor="kill-switch">
+      <name>Kill Switch and Emergency Shutdown</name>
+
+      <section anchor="shutdown-modes">
+        <name>Shutdown Modes</name>
+        <t>Graceful Shutdown: Save state, close connections, upload logs.</t>
+
+        <t>Immediate Shutdown: Terminate all operations instantly, broadcast
+        emergency beacon.</t>
+
+        <t>Restricted Mode: Only Authority communication allowed; agent awaits
+        instructions.</t>
+      </section>
+
+      <section anchor="shutdown-triggers">
+        <name>Shutdown Triggers</name>
+        <t>Authority-Initiated: A signed shutdown command from the Authority.</t>
+
+        <t>Kernel-Initiated: Automatic triggers for integrity failures,
+        unreachable Authority, or tamper detection.</t>
+
+        <t>Operator-Initiated: An authenticated emergency stop by the operator.</t>
+      </section>
+
+      <section anchor="fleet-shutdown">
+        <name>Fleet-Wide Shutdown</name>
+        <t>The Authority can issue a shutdown command to an entire fleet (e.g.,
+        all T2 agents in region NA-01).  To prevent misuse, this command
+        requires multi-region consensus signatures.</t>
+      </section>
+
+      <section anchor="recovery">
+        <name>Recovery from Shutdown</name>
+        <t>An agent cannot restart without a valid authorize_restart token from
+        the Authority, which may specify new restrictions (e.g., "must apply
+        patch" or "enhanced monitoring required").</t>
+      </section>
+
+      <section anchor="peer-consensus">
+        <name>Peer Consensus Failsafe (T3+)</name>
+        <t>This mechanism provides a bottom-up defense against a compromised or
+        malicious Authority for T3 and T4 agents.</t>
+
+        <ol>
+          <li>Trigger: A T3/T4 agent fleet receives a valid, Authority-signed
+          command (e.g., fleet_shutdown) that is deemed anomalous by the
+          agents' internal policy (e.g., "shutdown a hospital").</li>
+
+          <li>Consensus: The agents use a peer mesh network to hold a vote.</li>
+
+          <li>Action: If a supermajority (e.g., greater than 75%) of peers
+          (all validating each other with their PQC hybrid_signatures)
+          vote to reject the command, the fleet will ignore the Authority
+          command, enter Restricted Mode, and send an alert to the Human
+          Review Board.</li>
+        </ol>
+      </section>
+
+      <section anchor="identity-rotation">
+        <name>Peer-Attested Identity Rotation (T3+)</name>
+        <t>This mechanism makes the agent's long-term identity resilient to
+        theft for T3 and T4 agents.</t>
+
+        <ol>
+          <li>Trigger: Policy timer (e.g., 30 days) or Authority command.</li>
+
+          <li>Generation: Agent generates a new hybrid PQC identity keypair
+          (id_sk_n, id_pk_n) within its TEE.</li>
+
+          <li>Consensus: Agent broadcasts id_pk_n to its fleet peers.</li>
+
+          <li>Attestation: A supermajority (e.g., greater than 75%) of peers
+          verify the agent's current identity and sign the new public key.</li>
+
+          <li>Request: The agent sends a KeyRotationRequest (<xref target="msg-key-rotation"/>) to
+          the Authority, containing the new key and the bundle of peer
+          signatures.</li>
+
+          <li>Approval: The Authority verifies the peer consensus and updates
+          the Agent Registry, revoking the old key.  This mechanism
+          defeats permanent identity theft.</li>
+        </ol>
+      </section>
+    </section>
+
+    <section anchor="quarantine">
+      <name>Quarantine and Enforcement</name>
+
+      <section anchor="network-quarantine">
+        <name>Network-Level Quarantine</name>
+        <t>Non-compliant or rogue agents are isolated at the network layer.</t>
+
+        <t>Quarantine Triggers: Failed certification, repeated violations, or
+        kernel integrity failures.</t>
+
+        <t>Enforcement Mechanisms:</t>
+
+        <ol>
+          <li>API Access Revocation: Cloud providers (AWS, Azure, GCP) check
+          AIGA certificates and deny service to quarantined agents.</li>
+
+          <li>Network-Level Blocking: ISPs implement BGP-level <xref target="RFC4271"/>
+          filtering and firewalls based on a published quarantine list.</li>
+
+          <li>Legal Enforcement: Fines, civil liability, and invalidation of
+          insurance coverage.</li>
+        </ol>
+      </section>
+
+      <section anchor="quarantine-list">
+        <name>Quarantine List Protocol</name>
+        <t>The Authority publishes a signed, cross-attested quarantine list
+        every 15 minutes via multiple channels including DNSSEC <xref target="RFC4033"/>,
+        REST API, and BGP <xref target="RFC4271"/>.</t>
+      </section>
+
+      <section anchor="appeal">
+        <name>Appeal Process</name>
+        <t>Operators can appeal a quarantine decision to an independent review
+        board, with expedited appeals available for emergency cases.</t>
+      </section>
+    </section>
+
+    <section anchor="economic">
+      <name>Economic Incentive Model</name>
+
+      <section anchor="benefits">
+        <name>Benefits of Certification</name>
+        <t>To counter the cost advantages of ungoverned agents, AIGA
+        certification provides tangible economic benefits.</t>
+
+        <t>Market Access: Required by major API providers, enterprise
+        customers, and government contracts.</t>
+
+        <t>Legal Protections: Limited liability provisions and safe harbor
+        protections.</t>
+
+        <t>Insurance: Access to AI liability insurance with lower premiums.</t>
+
+        <t>Premium Services: Priority API access and cloud provider discounts.</t>
+
+        <t>Reputation: Public trust badge for certified agents.</t>
+      </section>
+
+      <section anchor="cost-noncompliance">
+        <name>Cost of Non-Compliance</name>
+        <t>Non-compliance costs include regulatory fines, loss of all revenue
+        via network quarantine, and full personal liability for operators.
+        This model makes certification the economically rational choice for
+        legitimate operators.</t>
+      </section>
+    </section>
+
+    <section anchor="crypto">
+      <name>Cryptographic Specifications</name>
+
+      <section anchor="crypto-algorithms">
+        <name>Cryptographic Algorithms</name>
+        <t>Signatures (Hybrid): ML-DSA-65 <xref target="FIPS204"/> plus Ed25519 <xref target="RFC8032"/>.
+        Verification requires both signatures to pass.</t>
+
+        <t>Key Exchange (Stage 1): ML-KEM-768 <xref target="FIPS203"/> plus X25519 <xref target="RFC7748"/>.</t>
+
+        <t>Key Exchange (Stage 2 Ratchet): X25519 only for performance.</t>
+
+        <t>Hashing: SHA-384 or SHA-512 <xref target="FIPS180-4"/>.</t>
+
+        <t>Symmetric Encryption: AES-256-GCM <xref target="RFC5116"/>.</t>
+
+        <t>MACs: HMAC-SHA384 <xref target="RFC2104"/>.</t>
+      </section>
+
+      <section anchor="key-management">
+        <name>Key Management</name>
+        <t>Agent Identity Keys (Long-Term): Hybrid PQC keys, generated in TEE
+        or HSM, rotatable as described in <xref target="identity-rotation"/>.</t>
+
+        <t>Session Keys (Short-Term): Ephemeral keys, derived via Double
+        Ratchet, stored in memory only, destroyed after use.</t>
+
+        <t>Authority Keys: Offline Root CA with online HSMs for Regional
+        Authorities.  All certificates are published in a transparency log.</t>
+      </section>
+
+      <section anchor="double-ratchet">
+        <name>Double Ratchet Protocol</name>
+        <t>AIGA uses a Double Ratchet protocol for session security.</t>
+
+        <ol>
+          <li>Initialization (Stage 1): A Root Key is derived via HKDF
+          <xref target="RFC5869"/> from a 3-way Diffie-Hellman exchange combining PQC and
+          classical key exchange.</li>
+
+          <li>Message Authentication (Stage 2): Each message uses a new
+          MessageKey derived from a KDF chain.  A new DH key is exchanged
+          with every message to ratchet the Root Key forward.</li>
+
+          <li>Security Properties: This provides Perfect Forward Secrecy (past
+          messages are safe if current key is stolen) and Future Secrecy
+          or Post-Compromise Recovery (future messages are safe if current
+          key is stolen, as the ratchet heals).</li>
+        </ol>
+      </section>
+
+      <section anchor="cert-format">
+        <name>Certificate Format</name>
+        <t>AIGA uses X.509 certificates <xref target="RFC5280"/> with custom AIGA extensions
+        specifying AIGA-Tier, AIGA-Capabilities, AIGA-Jurisdiction, and
+        AIGA-Operator fields.</t>
+      </section>
+    </section>
+
+    <section anchor="messages">
+      <name>Protocol Messages</name>
+      <t>This section defines the logical message flows.  All messages are
+      authenticated as specified in <xref target="double-ratchet"/>.</t>
+
+      <t>Transport binding: The default binding for AIGA messages is HTTPS, i.e.,
+      HTTP over TLS <xref target="RFC8446"/>.  AIGA security does not depend on channel
+      confidentiality alone; Evidence and tokens provide integrity and
+      authenticity at the application layer.  Alternative bindings that bind
+      Evidence/Results to TLS connections are being developed in the IETF SEAT
+      WG <xref target="SEAT"/> (e.g., <xref target="I-D.usama-seat-intra-vs-post"/>, <xref target="I-D.fossati-seat-expat"/>).</t>
+
+      <figure anchor="fig-message-flow">
+        <name>AIGA Message Flow</name>
+        <artwork type="ascii-art"><![CDATA[
++-----------+                               +-------------+
+|   Agent   |                               |  Authority   |
++-----------+                               +-------------+
+     |  HandshakeRequest (PQC sig)                 |
+     |-------------------------------------------->|
+     |  HandshakeResponse (PQC sig)                |
+     |<--------------------------------------------|
+     |  CheckInRequest (HMAC)                      |
+     |-------------------------------------------->|
+     |  CheckInResponse + LivenessToken (HMAC)     |
+     |<--------------------------------------------|
+     |  AuthorizationRequest (HMAC)                |
+     |-------------------------------------------->|
+     |  AuthorizationResponse (HMAC)               |
+     |<--------------------------------------------|
+     |  ProposeModification (HMAC)                 |
+     |-------------------------------------------->|
+     |  ProposalResponse (HMAC)                    |
+     |<--------------------------------------------|
+]]></artwork>
+      </figure>
+
+      <section anchor="msg-registration">
+        <name>Registration (Stage 1 Handshake)</name>
+        <t>This is the initial PQC-authenticated handshake to establish a
+        session.</t>
+
+        <t>Handshake Request: POST /v1/handshake</t>
+
+        <t>Sent by: Agent</t>
+
+        <t>Authentication: Full Hybrid PQC Signature</t>
+
+        <t>Content: agent_id, eph_public_key (PQC plus Classical),
+        kernel_attestation</t>
+
+        <t>Handshake Response:</t>
+
+        <t>Sent by: Authority</t>
+
+        <t>Authentication: Full Hybrid PQC Signature</t>
+
+        <t>Content: session_id, Authority eph_public_key, session_params (e.g.,
+        check-in interval)</t>
+      </section>
+
+      <section anchor="runtime-auth">
+        <name>Runtime Authentication (Stage 2 Ratchet)</name>
+        <t>This is the fast, lightweight check-in protocol.</t>
+
+        <t>Check-In Request: POST /v1/checkin</t>
+
+        <t>Sent by: Agent</t>
+
+        <t>Authentication: message_mac (HMAC-SHA384)</t>
+
+        <t>Content: msg_index, new eph_public_key (X25519 only), status,
+        integrity status, and audit summary</t>
+
+        <t>Check-In Response:</t>
+
+        <t>Sent by: Authority</t>
+
+        <t>Authentication: message_mac</t>
+
+        <t>Content: msg_index, new eph_public_key, status (continue),
+        liveness_token, token_expiry_seconds, next_checkin_seconds, and
+        optional policy directives</t>
+      </section>
+
+      <section anchor="msg-action-auth">
+        <name>Action Authorization</name>
+        <t>Authorization Request: POST /v1/authorize</t>
+
+        <t>Sent by: Agent (during Stage 2)</t>
+
+        <t>Authentication: message_mac</t>
+
+        <t>Content: action_id, action details (type and parameters), context,
+        risk self-assessment</t>
+
+        <t>Authorization Response:</t>
+
+        <t>Sent by: Authority</t>
+
+        <t>Authentication: message_mac</t>
+
+        <t>Content: decision (ALLOW, DENY, or DEFER_TO_HUMAN),
+        authorization_token (if ALLOW), review_ticket_id (if DEFER)</t>
+      </section>
+
+      <section anchor="msg-modification">
+        <name>Modification Proposal</name>
+        <t>Proposal Request: POST /v1/propose_modification (Stage 2)</t>
+
+        <t>Authentication: message_mac</t>
+
+        <t>Content: update_type, justification, code_diff_hash,
+        capability_changes, testing_results</t>
+
+        <t>Proposal Response: (Stage 2)</t>
+
+        <t>Authentication: message_mac</t>
+
+        <t>Content: status (pending_review or approved), authorization_token
+        (if approved, may contain M-of-N HRB signatures)</t>
+      </section>
+
+      <section anchor="msg-key-rotation">
+        <name>Key Rotation Request</name>
+        <t>Rotation Request: POST /v1/rotate_identity (Stage 2)</t>
+
+        <t>Authentication: message_mac</t>
+
+        <t>Content: new_id_public_key (Hybrid PQC) and peer_attestations (an
+        array of PQC signatures from peers)</t>
+      </section>
+    </section>
+
+  </middle>
+
+  <back>
+    <references>
+      <name>References</name>
+
+      <references>
+        <name>Normative References</name>
+
+        <reference anchor="FIPS180-4" target="https://doi.org/10.6028/NIST.FIPS.180-4">
+          <front>
+            <title>Secure Hash Standard (SHS)</title>
+            <author>
+              <organization>National Institute of Standards and Technology</organization>
+            </author>
+            <date year="2015" month="August"/>
+          </front>
+          <seriesInfo name="FIPS PUB" value="180-4"/>
+          <seriesInfo name="DOI" value="10.6028/NIST.FIPS.180-4"/>
+        </reference>
+
+        <reference anchor="FIPS203" target="https://doi.org/10.6028/NIST.FIPS.203">
+          <front>
+            <title>Module-Lattice-Based Key-Encapsulation Mechanism Standard</title>
+            <author>
+              <organization>National Institute of Standards and Technology</organization>
+            </author>
+            <date year="2024" month="August"/>
+          </front>
+          <seriesInfo name="FIPS PUB" value="203"/>
+          <seriesInfo name="DOI" value="10.6028/NIST.FIPS.203"/>
+        </reference>
+
+        <reference anchor="FIPS204" target="https://doi.org/10.6028/NIST.FIPS.204">
+          <front>
+            <title>Module-Lattice-Based Digital Signature Standard</title>
+            <author>
+              <organization>National Institute of Standards and Technology</organization>
+            </author>
+            <date year="2024" month="August"/>
+          </front>
+          <seriesInfo name="FIPS PUB" value="204"/>
+          <seriesInfo name="DOI" value="10.6028/NIST.FIPS.204"/>
+        </reference>
+
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2104.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.2782.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5116.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5280.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.5869.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7748.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8032.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.8446.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9334.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.9711.xml"/>
+
+      </references>
+
+      <references>
+        <name>Informative References</name>
+
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.4271.xml"/>
+        <xi:include href="https://bib.ietf.org/public/rfc/bibxml/reference.RFC.7595.xml"/>
+
+        <reference anchor="YAML1.2" target="https://yaml.org/spec/1.2.2/">
+          <front>
+            <title>YAML Ain't Markup Language (YAML) Version 1.2</title>
+            <author initials="O." surname="Ben-Kiki" fullname="Oren Ben-Kiki"/>
+            <author initials="C." surname="Evans" fullname="Clark Evans"/>
+            <author initials="I." surname="dOt Net" fullname="Ingy dOt Net"/>
+            <date year="2021" month="October"/>
+          </front>
+          <seriesInfo name="3rd" value="Edition"/>
+        </reference>
+
+        <reference anchor="I-D.fossati-seat-expat" target="https://datatracker.ietf.org/doc/html/draft-fossati-seat-expat-00">
+          <front>
+            <title>Remote Attestation with Exported Authenticators</title>
+            <author initials="T." surname="Fossati" fullname="Thomas Fossati"/>
+            <author initials="M. U." surname="Sardar" fullname="Muhammad Usama Sardar"/>
+            <author initials="T." surname="Reddy" fullname="Tirumaleswar Reddy"/>
+            <author initials="Y." surname="Sheffer" fullname="Yaron Sheffer"/>
+            <author initials="H." surname="Tschofenig" fullname="Hannes Tschofenig"/>
+            <author initials="I." surname="Mihalcea" fullname="Ionut Mihalcea"/>
+            <date year="2025" month="October" day="20"/>
+          </front>
+          <seriesInfo name="Internet-Draft" value="draft-fossati-seat-expat-00"/>
+        </reference>
+
+        <reference anchor="I-D.usama-seat-intra-vs-post" target="https://datatracker.ietf.org/doc/html/draft-usama-seat-intra-vs-post-03">
+          <front>
+            <title>Pre-, Intra- and Post-handshake Attestation</title>
+            <author initials="M. U." surname="Sardar" fullname="Muhammad Usama Sardar"/>
+            <date year="2026" month="January" day="22"/>
+          </front>
+          <seriesInfo name="Internet-Draft" value="draft-usama-seat-intra-vs-post-03"/>
+        </reference>
+
+        <reference anchor="SEAT" target="https://datatracker.ietf.org/wg/seat/about/">
+          <front>
+            <title>Secure Evidence and Attestation Transport (SEAT) Working Group</title>
+            <author>
+              <organization>IETF</organization>
+            </author>
+            <date/>
+          </front>
+        </reference>
+
+      </references>
+    </references>
+
+    <section anchor="iana">
+      <name>IANA Considerations</name>
+
+      <section anchor="iana-uri">
+        <name>URI Scheme Registration</name>
+        <t>This document requests registration of the "aiga" URI scheme as per
+        <xref target="RFC7595"/>:</t>
+
+        <t>Scheme name: aiga</t>
+
+        <t>Status: Provisional</t>
+
+        <t>Scheme syntax: aiga:&lt;version&gt;.&lt;region&gt;.&lt;tier&gt;:&lt;agent-uuid&gt;:&lt;cert-hash&gt;</t>
+
+        <t>Scheme semantics: Identification of AI agents within the AIGA
+        framework</t>
+
+        <t>Security considerations: See <xref target="security"/> of this document</t>
+      </section>
+
+      <section anchor="iana-registry">
+        <name>AIGA Registry</name>
+        <t>This document requests establishment of an AIGA registry for:</t>
+
+        <t>Protocol version numbers</t>
+
+        <t>Status codes (e.g., DEFER_TO_HUMAN)</t>
+
+        <t>Action types (e.g., financial_transaction)</t>
+
+        <t>Shutdown reason codes</t>
+
+        <t>Quarantine reason codes</t>
+
+        <t>PQC and classical algorithm identifiers</t>
+      </section>
+
+      <section anchor="iana-service">
+        <name>Service Name Registration</name>
+        <t>This document requests the registration of the _aiga service name
+        with IANA, for use with DNS SRV records <xref target="RFC2782"/>.</t>
+
+        <t>Service Name: _aiga</t>
+
+        <t>Transport Protocol(s): _tls</t>
+
+        <t>Description: AI Governance and Accountability Protocol</t>
+
+        <t>Reference: This document</t>
+      </section>
+    </section>
+
+    <section anchor="security">
+      <name>Security Considerations</name>
+      <t>See <xref target="threat-model"/> for the complete Threat Model.</t>
+
+      <t>Periodic check-ins: One-time attestation (e.g., only at boot) creates a
+      time-of-check/time-of-use vulnerability: an Agent can boot in a trusted
+      state and be compromised later.  Periodic Evidence submission and liveness
+      token issuance reduce this window by enabling (1) detection of runtime
+      compromise, (2) dynamic revocation when vulnerabilities or policy
+      violations are discovered, and (3) freshness guarantees that prevent replay
+      of old Evidence.  These considerations align with RATS time/freshness
+      guidance <xref target="RFC9334"/> and the use of signed claims sets such as EAT <xref target="RFC9711"/>.</t>
+
+      <t>Liveness token issuer and validation: The Authority acts as the Verifier
+      and issues the liveness token as an Attestation Result.  Relying parties
+      MUST validate the token signature and issuer, expiry, and certificate
+      status (revocation), and MUST enforce any instance_id, tier, and capability
+      constraints embedded in the token or referenced certificate.</t>
+
+      <t>Peer Collusion: This is mitigated by requiring all peer-to-peer
+      messages (Heartbeat, Vote, Attestation) to use the agent's long-
+      term, PQC-based hybrid_signature.  A Sybil attack is impossible
+      without stealing a supermajority of TEE-protected keys.</t>
+
+      <t>Authority Compromise: Mitigated by the Federated Authority Network
+      (requiring multi-region signatures for fleet shutdowns) and the Peer
+      Consensus Failsafe (<xref target="peer-consensus"/>), which provides a final, bottom-up
+      defense.</t>
+
+      <t>Governance Fatigue: Mitigated by the Warden Triumvirate
+      (<xref target="update-protocol"/>), which automates low-risk approvals, and the Human
+      Review Board (<xref target="update-protocol"/>), which distributes high-risk decisions.</t>
+
+      <t>Shadow Process Attack: Mitigated by the Multi-Vendor TEE Attestation
+      (M-TACE) requirement (<xref target="kernel-integrity"/>), which would require an attacker
+      to have zero-day exploits for multiple hardware vendors
+      simultaneously.</t>
+
+      <t>Supply Chain Attack: Mitigated by M-TACE and the recommendation for
+      operators to use a secure, verified procurement process for
+      hardware.</t>
+
+      <t>Session Key Compromise: Mitigated by the Double Ratchet Protocol
+      (<xref target="double-ratchet"/>), which provides Post-Compromise Recovery.</t>
+
+      <t>Long-Term Key Compromise: Mitigated by Peer-Attested Identity
+      Rotation (<xref target="identity-rotation"/>), which makes the identity resilient and time-
+      limits the value of a stolen key.</t>
+    </section>
+
+    <section anchor="acknowledgments" numbered="false">
+      <name>Acknowledgments</name>
+      <t>The author thanks Muhammad Usama Sardar for his review and suggestions, 
+      and the AI safety research community for discussions on threat models and 
+      governance mechanisms that informed this work.</t>
+    </section>
+
+  </back>
+</rfc>
