@@ -1,7 +1,7 @@
 ---
 title: "AI Governance and Accountability Protocol (AIGA)"
 abbrev: "AIGA"
-docname: draft-aylward-aiga-2-00
+docname: draft-todo-aylward-aiga-2-latest
 category: info
 ipr: trust200902
 
